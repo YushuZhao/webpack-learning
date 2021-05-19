@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <div style='width:100px;height:100px;position: absolute;top:0;left:0;background-color: aquamarine;'></div> -->
+</body>
+<script>
+    /**
+     * Promise 多种错误监测与catch使用
+     */
+    // new Promise((resolve, reject) => {
+    //     reject(new Error("promise fail"));
+    //     // throw new Error("fail");
+    //     // ys = ys + 100;
+    //     // 自带  try catch : try {ys = ys + 100;} catch (error) {reject(error);}
+    // }).then(
+    //     value => console.log(value),
+    //     // reason => {
+    //     //     console.log(reason)
+    //     // }
+    // ).catch(error => {
+    //     console.log(error)
+    // });
+
+    // -----------------------
+
+
+    /**
+     * promise 宏任务与微任务处理机制
+     */
+
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //             console.log('setTimeout')
+    //             resolve('fullfilled');
+    //         }, 0)
+    //         // reject('拒绝');
+    // }).then(msg => {
+    //     console.log('成功业务处理' + msg)
+    // }, error => {
+    //     console.log('拒绝业务处理')
+    // })
+    // console.log('主线程 同步任务')
+
+    // -----------------------
+
+
+    /**
+     * promise 微任务处理机制 
+     */
+
+    // 微任务：then
+
+    // setTimeout(()=>{
+    //     console.log('任务队列 setTimeout')
+    // },0)
+
+    // new Promise((resolve,reject)=>{
+    //     console.log('promise (同步)任务');
+    //     resolve();
+    //     // reject('拒绝');
+    // }).then(value=>{
+    //     console.log('成功业务处理')
+    // },reason=>{
+    //     console.log('拒绝业务处理')
+    // })
+
+    // console.log('主线程 同步任务') 
+
+    // -----------------------
+
+
+    /**
+     * 定时器的任务轮询
+     */
+    // function interval(callback,delay=100){
+    //     let id = setInterval(()=>callback(id), delay);
+    // }
+
+    // interval((timeId)=>{
+    //     // 移动div
+    //     const div = document.querySelector('div');
+    //     let left = parseInt(window.getComputedStyle(div).left);
+    //     div.style.left = left + 10+ 'px'
+    //     console.log(left)
+    //     if(left >= 200){
+    //         clearInterval(timeId);
+
+    //         interval((timeId)=>{
+    //             // div变窄
+    //             let width = parseInt(window.getComputedStyle(div).width);
+    //             div.style.width = width - 10+ 'px'
+    //             if(width <= 20){
+    //                 clearInterval(timeId);
+    //             }
+    //         })
+    //     }
+    // })
+    // console.log('初始化')
+
+
+    // -----------------------
+
+
+    /**
+     * 异步加载图片
+     */
+    // function loadImg(src,resolve,reject){
+    //     let image = new Image(600,300);
+    //     image.src = src;
+    //     image.onload = ()=>{
+    //         resolve(image)
+    //     };
+    //     image.onerror = reject;
+    // }
+    // loadImg('../images/earth2.jpg', (image)=>{
+    //     document.body.appendChild(image)
+    //     console.log('加载图片成功')
+    // },()=>{
+    //     console.log('加载图片失败')
+    // });
+    // console.log('加载图片')
+
+    /**
+     * promise 异步加载图片
+     */
+    // function loadImg(src) {
+    //     return new Promise((resolve, reject) => {
+    //         const image = new Image();
+    //         image.src = src;
+    //         image.onload = () => {
+    //             resolve(image)
+    //         };
+    //         image.onerror = reject;
+    //         document.body.appendChild(image)
+    //     })
+    // }
+    // loadImg('../images/earth.jpg').then(image => {
+    //     image.style.border = "solid 6px red";
+    // })
+</script>
+
+</html>
